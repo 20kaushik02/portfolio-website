@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import { Box, Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Chip, List, ListItem, ListItemText, Stack, Typography } from '@mui/material';
+import { Box, Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Chip, List, ListItem, ListItemText, Typography } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import "swiper/css";
 import { Pagination, Navigation, EffectFade } from "swiper/modules";
 
 import { WidthContext } from '../App';
-import { handleButtonClick } from '../utils/linkClick';
+import { handleLinkClick } from '../utils/linkClick';
 
 export const projectsData = [
 	{
@@ -13,6 +13,7 @@ export const projectsData = [
 		name: 'TCP-RL',
 		img: 'fyp-arch-diag.png',
 		desc: [
+			// eslint-disable-next-line
 			'Implemented RL based TCP congestion control (deep Q-learning and PPO models), which were 2% more performant\
 			compared to TCPNewReno.',
 			'Demonstrated that performance under simple adversarial attacks was dampened by 40%.',
@@ -27,7 +28,7 @@ export const projectsData = [
 		img: 'k-site-landing.png',
 		desc: [
 			'Flagship website for the 2023 edition of Kurukshetra, CEG\'s international techno-management fest.',
-			'Handled a peak of 10,000 daily users and transactions',
+			'Avg. traffic of 1,000 daily users and transactions',
 			'Built with React and Express.js',
 		],
 		tools: ['React', 'Express.js', 'AWS'],
@@ -39,7 +40,7 @@ export const projectsData = [
 		img: 'donut-eat-me-gameplay.png',
 		desc: [
 			'An isometric 3D pastry-themed action platformer where you play as a donut and fight other pastries!',
-			'Made with Unity, all assets designed with Blender.',
+			'Made with Unity, designed in Blender.',
 		],
 		tools: ['Blender', 'Unity'],
 		link: 'https://kirangeorge.itch.io/donut-eat-me'
@@ -67,7 +68,7 @@ const Projects = () => {
 						height="140"
 						image={process.env.PUBLIC_URL + "Projects/" + project.img}
 						alt={project.name}
-						onClick={() => handleButtonClick(process.env.PUBLIC_URL + "Projects/" + project.img)}
+						onClick={() => handleLinkClick(process.env.PUBLIC_URL + "Projects/" + project.img)}
 					/>
 					<CardContent align="left">
 						<Typography gutterBottom primaryTypographyProps={{ fontSize: 16 }} component="div">
@@ -88,7 +89,7 @@ const Projects = () => {
 					</CardContent>
 				</CardActionArea>
 				<CardActions>
-					<Button onClick={() => handleButtonClick(project.link)} className="CheckButton">
+					<Button onClick={() => handleLinkClick(project.link)} className="CheckButton">
 						Check it out
 					</Button>
 				</CardActions>

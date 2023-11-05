@@ -15,50 +15,68 @@ import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
+// import Link from '@mui/material/Link';
 
 import LandingIcon from '@mui/icons-material/Home';
 import ProjIcon from '@mui/icons-material/AccountTree';
 import ExpIcon from '@mui/icons-material/Work';
-import SkilIcon from '@mui/icons-material/Build';
-import EduIcon from '@mui/icons-material/School';
+import SkilIcon from '@mui/icons-material/Laptop';
 import IntsIcon from '@mui/icons-material/SportsEsports';
 import ArticleIcon from '@mui/icons-material/Article';
 
 import Landing from './Landing';
 import LoremIpsum from './LoremIpsum';
 import Projects from './Projects';
+import Career from './Career';
+import { handleLinkClick } from '../utils/linkClick';
 
 const drawerWidth = 240;
 
 const menuSections = [
-	{ key: 'landing', display_name: 'Home', appbar_text: 'Hello There!', display_icon: <LandingIcon />, },
-	{ key: 'proj', display_name: 'Projects', appbar_text: 'My Projects', display_icon: <ProjIcon />, },
-	{ key: 'exp', display_name: 'Experiences', appbar_text: 'My Career', display_icon: <ExpIcon />, },
-	{ key: 'skil', display_name: 'Skills', appbar_text: 'My Skills', display_icon: <SkilIcon />, },
-	{ key: 'edu', display_name: 'Education', appbar_text: 'My Education', display_icon: <EduIcon />, },
-	{ key: 'ints', display_name: 'Interests', appbar_text: 'My Interests', display_icon: <IntsIcon />, },
-	{ key: 'resume', display_name: 'Resume', appbar_text: 'My Resume', display_icon: <ArticleIcon />, },
-];
-
-const menuSectionsData = [
-	{ key: 'landing', component: <Landing /> },
-	{ key: 'proj', component: <Projects /> },
-	{ key: 'exp', component: <LoremIpsum /> },
-	{ key: 'skil', component: <LoremIpsum /> },
-	{ key: 'edu', component: <LoremIpsum /> },
-	{ key: 'ints', component: <LoremIpsum /> },
-	{ key: 'resume', component: <LoremIpsum /> },
+	{
+		key: 'landing', display_name: 'Home', appbar_text: 'Hello There!', display_icon: <LandingIcon />,
+		extLink: false, component: <Landing />
+	},
+	{
+		key: 'proj', display_name: 'Projects', appbar_text: 'My Projects', display_icon: <ProjIcon />,
+		extLink: false, component: <Projects />
+	},
+	{
+		key: 'exp', display_name: 'Career', appbar_text: 'My Journey', display_icon: <ExpIcon />,
+		extLink: false, component: <Career />
+	},
+	{
+		key: 'skil', display_name: 'Skills', appbar_text: 'My Skills', display_icon: <SkilIcon />,
+		extLink: false, component: <LoremIpsum />
+	},
+	{
+		key: 'ints', display_name: 'Interests', appbar_text: 'My Interests', display_icon: <IntsIcon />,
+		extLink: false, component: <LoremIpsum />
+	},
+	{
+		key: 'resume', display_name: 'Resume', appbar_text: 'My Resume', display_icon: <ArticleIcon />,
+		extLink: true, link: process.env.PUBLIC_URL + "myresume.pdf"
+	},
 ];
 
 export default function Menu(props) {
 	const { window } = props;
 	const [mobileOpen, setMobileOpen] = React.useState(false);
-	const [activeSection, setActiveSection] = React.useState('landing');
+	const [activeSection, setActiveSection] = React.useState(menuSections[0]);
 
 	const handleDrawerToggle = () => {
 		setMobileOpen(!mobileOpen);
 	};
+
+	const handleDrawerSelect = (selectedSectionKey) => {
+		handleDrawerToggle();
+		const menuSection = menuSections.filter((menuItem) => menuItem.key === selectedSectionKey)[0];
+		if (menuSection.extLink === true) {
+			handleLinkClick(menuSection.link);
+			return;
+		}
+		setActiveSection(menuSection);
+	}
 
 	const drawer = (
 		<div>
@@ -70,8 +88,8 @@ export default function Menu(props) {
 			<Divider />
 			<List>
 				{menuSections.map((menuItem, index) => (
-					<ListItem onClick={() => { handleDrawerToggle(); setActiveSection(menuItem.key); }} key={menuItem.key} disablePadding>
-						<ListItemButton selected={activeSection === menuItem.key}>
+					<ListItem onClick={() => { handleDrawerSelect(menuItem.key); }} key={menuItem.key} disablePadding>
+						<ListItemButton selected={activeSection.key === menuItem.key}>
 							<ListItemIcon>
 								{menuItem.display_icon}
 							</ListItemIcon>
@@ -112,7 +130,7 @@ export default function Menu(props) {
 						<MenuIcon />
 					</IconButton>
 					<Typography variant="h6" noWrap component="div">
-						{menuSections.filter((menuItem) => menuItem.key === activeSection)[0].appbar_text}
+						{activeSection.appbar_text}
 					</Typography>
 				</Toolbar>
 			</AppBar>
@@ -153,7 +171,7 @@ export default function Menu(props) {
 				sx={{ flexGrow: 1, padding: 1, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
 			>
 				<Toolbar />
-				{menuSectionsData.filter((menuItem) => menuItem.key === activeSection)[0].component}
+				{activeSection.component}
 			</Box>
 		</Box>
 	);

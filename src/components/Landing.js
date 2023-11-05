@@ -1,11 +1,12 @@
 import React from 'react';
-import { Button, ButtonGroup, List, ListItem, ListItemText, Typography } from '@mui/material';
-import { handleButtonClick } from '../utils/linkClick';
+import { Button, ButtonGroup, Divider, List, ListItem, ListItemText, Typography } from '@mui/material';
+import { handleLinkClick } from '../utils/linkClick';
 
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
 import { projectsData } from './Projects';
+import { experiencesData } from './Career';
 
 const socialsData = [
 	{ key: 'github', socialText: 'GitHub', socialLink: 'https://github.com/20kaushik02', socialIcon: <GitHubIcon /> },
@@ -20,7 +21,7 @@ const Landing = () => {
 				{/* one-liner summary */}
 				<ListItem>
 					<ListItemText
-						primary={"TL;DR: Aspiring SWE whose passions lie in cloud technologies,\
+						primary={"I'll be brief: Aspiring SWE whose passions lie in cloud technologies,\
 						web development and machine learning, but open to much more."} />
 				</ListItem>
 				{/* intro with education */}
@@ -29,13 +30,28 @@ const Landing = () => {
 						primary={"I'm currently pursuing my masters in computer\
 					science at ASU, and will be graduating in the summer of 2025."} />
 				</ListItem>
-				{/* current stuff and last stint */}
+				{/* current stuff */}
 				<ListItem>
 					<ListItemText
-						primary={"Recently, I've been tinkering with " + projectsData[0].oneliner + ". My last stint was at *insert recent experience* as a\
-						*insert recent role*, *insert recent role's description*."} />
+						primary={"Recently, I've been tinkering with " + projectsData[0].oneliner + "."} />
+				</ListItem>
+				{/* last stint */}
+				<ListItem>
+					<ListItemText
+						primary={"My last stint was at " +
+							experiencesData.filter(exp => exp.type === 'prof')[0].location + " as a " +
+							experiencesData.filter(exp => exp.type === 'prof')[0].designation + "."} />
 				</ListItem>
 			</List>
+			<Divider />
+			<Button
+				size="large"
+				variant="outlined"
+				onClick={() => handleLinkClick(process.env.PUBLIC_URL + "myresume.pdf")}
+			>
+				My Resume
+			</Button>
+			<Divider />
 			<Typography paragraph>
 				Reach me at:
 			</Typography>
@@ -46,7 +62,7 @@ const Landing = () => {
 				{socialsData.map((social) => (
 					<Button
 						key={social.key}
-						onClick={() => handleButtonClick(social.socialLink)}
+						onClick={() => handleLinkClick(social.socialLink)}
 					>
 						{social.socialIcon}
 					</Button>
