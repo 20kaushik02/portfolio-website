@@ -81,11 +81,11 @@ export default function Menu(props) {
 				))}
 			</List>
 			<Divider />
-			<Box component="div" align="center" padding={2}>
+			{/* <Box component="div" align="center" padding={2}>
 				<Link sx={{ padding: 1 }} href="https://mui.com" underline="hover">
 					Made with MUI
 				</Link>
-			</Box>
+			</Box> */}
 		</div>
 	);
 
@@ -150,7 +150,7 @@ export default function Menu(props) {
 			{/* content goes here */}
 			<Box
 				component="main"
-				sx={{ flexGrow: 1, padding: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+				sx={{ flexGrow: 1, padding: 1, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
 			>
 				<Toolbar />
 				{menuSectionsData.filter((menuItem) => menuItem.key === activeSection)[0].component}

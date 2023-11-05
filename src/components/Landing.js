@@ -5,6 +5,7 @@ import { handleButtonClick } from '../utils/linkClick';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
+import { projectsData } from './Projects';
 
 const socialsData = [
 	{ key: 'github', socialText: 'GitHub', socialLink: 'https://github.com/20kaushik02', socialIcon: <GitHubIcon /> },
@@ -19,8 +20,8 @@ const Landing = () => {
 				{/* one-liner summary */}
 				<ListItem>
 					<ListItemText
-						primary={"TL;DR: Aspiring SWE whose passions lie in computer\
-					networks, web development and machine learning."} />
+						primary={"TL;DR: Aspiring SWE whose passions lie in cloud technologies,\
+						web development and machine learning, but open to much more."} />
 				</ListItem>
 				{/* intro with education */}
 				<ListItem>
@@ -31,8 +32,7 @@ const Landing = () => {
 				{/* current stuff and last stint */}
 				<ListItem>
 					<ListItemText
-						primary={"Right now, I'm working on *insert recent project\
-						here*. My last stint was at *insert recent experience* as a\
+						primary={"Recently, I've been tinkering with " + projectsData[0].oneliner + ". My last stint was at *insert recent experience* as a\
 						*insert recent role*, *insert recent role's description*."} />
 				</ListItem>
 			</List>
