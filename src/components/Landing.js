@@ -24,7 +24,7 @@ const Landing = () => {
 						primary={"I'll be brief: Aspiring SWE whose passions lie in cloud technologies,\
 						web development and machine learning, but open to much more."} />
 				</ListItem>
-				{/* intro with education */}
+				{/* education, for now */}
 				<ListItem>
 					<ListItemText
 						primary={"I'm currently pursuing my masters in computer\
@@ -42,18 +42,15 @@ const Landing = () => {
 							experiencesData.filter(exp => exp.type === 'prof')[0].location + " as a " +
 							experiencesData.filter(exp => exp.type === 'prof')[0].designation + "."} />
 				</ListItem>
+				{/* last stint */}
+				<ListItem>
+					<ListItemText
+						primary={"Yes it's a simple website :)"} />
+				</ListItem>
 			</List>
 			<Divider />
-			<Button
-				size="large"
-				variant="outlined"
-				onClick={() => handleLinkClick(process.env.PUBLIC_URL + "myresume.pdf")}
-			>
-				My Resume
-			</Button>
-			<Divider />
-			<Typography paragraph>
-				Reach me at:
+			<Typography paragraph p={1}>
+				More at:
 			</Typography>
 			<ButtonGroup
 				size="large"
