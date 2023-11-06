@@ -45,7 +45,7 @@ const Landing = () => {
 				{/* last stint */}
 				<ListItem>
 					<ListItemText
-						primary={"Yes it's a simple website :)"} />
+						primary={"Yes it's a simple website, and yes it's not finished yet :)"} />
 				</ListItem>
 			</List>
 			<Divider />

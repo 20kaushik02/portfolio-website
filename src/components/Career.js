@@ -6,6 +6,7 @@ export const experiencesData = [
     key: 'sde-intern-rq', type: 'prof', location: 'RootQuotient Technologies', designation: 'Software Developer Intern',
     desc: [
       'Developed interactive user interfaces for client applications using ReactJS, TypeScript, and the Ant Design library.',
+      // eslint-disable-next-line
       'Implemented a comprehensive admin dashboard for a client’s banking administration application, following MVC\
       patterns for seamless backend integration.',
       'Actively contributed to bug fixes and enhanced an internal package by adding API documentation.'
@@ -16,8 +17,10 @@ export const experiencesData = [
     key: 'tech-sd-ctf', type: 'extra', location: 'CEG Tech Forum', designation: 'Student Director of Technical Operations',
     desc: [
       'Headed a 20-member strong technical operations team as the Lead Developer, Sysadmin, and Project Manager.',
+      // eslint-disable-next-line
       'Spearheaded multiple web apps developed for various purposes, such as a custom ERP mobile app, admin dashboards,\
       and the flagship website for Kurukshetra, the international techno-management fest of CEG.',
+      // eslint-disable-next-line
       'Organized a technical summit on "Innovation and Transformation: AI, Autonomous Systems, and Disruptive Trends"\
       featuring projects by local innovators and keynotes from BNY Mellon, Microsoft, and startups.'
     ],

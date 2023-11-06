@@ -25,10 +25,11 @@ import IntsIcon from '@mui/icons-material/SportsEsports';
 import ArticleIcon from '@mui/icons-material/Article';
 
 import Landing from './Landing';
-import LoremIpsum from './LoremIpsum';
+// import LoremIpsum from './LoremIpsum';
 import Projects from './Projects';
 import Career from './Career';
 import { handleLinkClick } from '../utils/linkClick';
+import UnderConstruction from './UnderConstruction';
 
 const drawerWidth = 240;
 
@@ -47,11 +48,11 @@ const menuSections = [
 	},
 	{
 		key: 'skil', display_name: 'Skills', appbar_text: 'My Skills', display_icon: <SkilIcon />,
-		extLink: false, component: <LoremIpsum />
+		extLink: false, component: <UnderConstruction />
 	},
 	{
 		key: 'ints', display_name: 'Interests', appbar_text: 'My Interests', display_icon: <IntsIcon />,
-		extLink: false, component: <LoremIpsum />
+		extLink: false, component: <UnderConstruction />
 	},
 	{
 		key: 'resume', display_name: 'Resume', appbar_text: 'My Resume', display_icon: <ArticleIcon />,
