@@ -47,7 +47,7 @@ export const experiencesData = [
       'Graduated first-class with distinction with a 9.12 CGPA',
       'Relevant coursework: DBMS, OOPS, full-stack development, cloud computing, deep learning, computer networks',
     ],
-    startDate: 'Aug 2023', endDate: 'May 2025'
+    startDate: 'July 2019', endDate: 'June 2023'
   },
 ];
 

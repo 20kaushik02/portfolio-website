@@ -54,7 +54,7 @@ export const projectsData = [
 			'Developed using scapy and PyQt.',
 		],
 		tools: ['Python', 'Qt', 'scapy'],
-		link: 'https://kirangeorge.itch.io/donut-eat-me'
+		link: 'https://github.com/20kaushik02/AUNMS---Network-Monitoring-System'
 	},
 ]
 const Projects = () => {
