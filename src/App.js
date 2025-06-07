@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from 'react';
-import './App.css';
 import Menu from './components/Menu';
 
 export const WidthContext = createContext();
@@ -23,9 +22,7 @@ function App() {
   }, []);
   return (
     <WidthContext.Provider value={width}>
-      <div className="App">
-        <Menu />
-      </div>
+      <Menu />
     </WidthContext.Provider>
   );
 }

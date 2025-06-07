@@ -18,17 +18,18 @@ const Landing = () => {
 	return (
 		<>
 			<List>
-				{/* one-liner summary */}
+				{/* summary */}
 				<ListItem>
 					<ListItemText
-						primary={"I'll be brief: Aspiring SWE whose passions lie in cloud technologies,\
-						web development and machine learning, but open to much more."} />
+						primary={"Welcome to my (messy) homepage. I'm an aspiring software developer\
+							whose passions lie in distributed technologies, networks and security,\
+							web development, and machine learning, but open to much more." } />
 				</ListItem>
-				{/* education, for now */}
+				{/* current endeavor */}
 				<ListItem>
 					<ListItemText
-						primary={"I'm currently pursuing my masters in computer\
-					science at ASU, and will be graduating in the summer of 2025."} />
+						primary={"I'm currently looking for a job! If you know any openings that\
+							you think I would be a good fit for, do reach out." } />
 				</ListItem>
 				{/* current stuff */}
 				<ListItem>
@@ -42,14 +43,9 @@ const Landing = () => {
 							experiencesData.filter(exp => exp.type === 'prof')[0].location + " as a " +
 							experiencesData.filter(exp => exp.type === 'prof')[0].designation + "."} />
 				</ListItem>
-				{/* last stint */}
-				<ListItem>
-					<ListItemText
-						primary={"Yes it's a simple website, and yes it's not finished yet :)"} />
-				</ListItem>
 			</List>
 			<Divider />
-			<Typography paragraph p={1}>
+			<Typography p={2}>
 				More at:
 			</Typography>
 			<ButtonGroup

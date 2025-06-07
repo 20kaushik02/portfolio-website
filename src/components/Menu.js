@@ -18,11 +18,11 @@ import Typography from '@mui/material/Typography';
 // import Link from '@mui/material/Link';
 
 import LandingIcon from '@mui/icons-material/Home';
-import ProjIcon from '@mui/icons-material/AccountTree';
-import ExpIcon from '@mui/icons-material/Work';
-import SkilIcon from '@mui/icons-material/Laptop';
-import IntsIcon from '@mui/icons-material/SportsEsports';
+import ProjectsIcon from '@mui/icons-material/AccountTree';
+import CareerIcon from '@mui/icons-material/Work';
+import InterestsIcon from '@mui/icons-material/Headphones';
 import ArticleIcon from '@mui/icons-material/Article';
+import BlogIcon from '@mui/icons-material/RateReview';
 
 import Landing from './Landing';
 // import LoremIpsum from './LoremIpsum';
@@ -35,47 +35,54 @@ const drawerWidth = 240;
 
 const menuSections = [
 	{
-		key: 'landing', display_name: 'Home', appbar_text: 'Hello There!', display_icon: <LandingIcon />,
+		key: 'landing', display_name: 'About', appbar_text: 'Hello There!', display_icon: <LandingIcon />,
 		extLink: false, component: <Landing />
 	},
 	{
-		key: 'proj', display_name: 'Projects', appbar_text: 'My Projects', display_icon: <ProjIcon />,
+		key: 'proj', display_name: 'Stuff', appbar_text: 'Workbench', display_icon: <ProjectsIcon />,
 		extLink: false, component: <Projects />
 	},
 	{
-		key: 'exp', display_name: 'Career', appbar_text: 'My Journey', display_icon: <ExpIcon />,
+		key: 'exp', display_name: 'Work', appbar_text: 'Journey', display_icon: <CareerIcon />,
 		extLink: false, component: <Career />
 	},
 	{
-		key: 'skil', display_name: 'Skills', appbar_text: 'My Skills', display_icon: <SkilIcon />,
+		key: 'ints', display_name: 'Interests', appbar_text: 'My Interests', display_icon: <InterestsIcon />,
 		extLink: false, component: <UnderConstruction />
 	},
 	{
-		key: 'ints', display_name: 'Interests', appbar_text: 'My Interests', display_icon: <IntsIcon />,
-		extLink: false, component: <UnderConstruction />
-	},
-	{
-		key: 'resume', display_name: 'Resume', appbar_text: 'My Resume', display_icon: <ArticleIcon />,
+		key: 'resume', display_name: 'Resume/CV', appbar_text: 'Resume/CV', display_icon: <ArticleIcon />,
 		extLink: true, link: process.env.PUBLIC_URL + "myresume.pdf"
+	},
+	{
+		key: 'blog', display_name: 'My Scribbles', appbar_text: 'My Scribbles', display_icon: <BlogIcon />,
+		extLink: true, link: "https://blog.knravish.me"
 	},
 ];
 
-export default function Menu(props) {
-	const { window } = props;
+function Menu(props) {
 	const [mobileOpen, setMobileOpen] = React.useState(false);
+	const [isClosing, setIsClosing] = React.useState(false);
 	const [activeSection, setActiveSection] = React.useState(menuSections[0]);
 
+	const handleDrawerClose = () => {
+		setIsClosing(true);
+		setMobileOpen(false);
+	};
+
+	const handleDrawerTransitionEnd = () => {
+		setIsClosing(false);
+	};
+
 	const handleDrawerToggle = () => {
-		setMobileOpen(!mobileOpen);
+		if (!isClosing) {
+			setMobileOpen(!mobileOpen);
+		}
 	};
 
 	const handleDrawerSelect = (selectedSectionKey) => {
-		handleDrawerToggle();
+		handleDrawerClose();
 		const menuSection = menuSections.filter((menuItem) => menuItem.key === selectedSectionKey)[0];
-		if (menuSection.extLink === true) {
-			handleLinkClick(menuSection.link);
-			return;
-		}
 		setActiveSection(menuSection);
 	}
 
@@ -83,14 +90,27 @@ export default function Menu(props) {
 		<div>
 			{/* <Toolbar /> */}
 			<Box component="div" align="center" padding={2}>
-				<Avatar src={process.env.PUBLIC_URL + "pappu2.jpg"} alt='' sx={{ width: 120, height: 120 }} />
+				<Avatar src={process.env.PUBLIC_URL + "pappu2.jpg"} alt='profile pic' sx={{ width: 120, height: 120 }} />
 				<Typography sx={{ padding: 2 }}>Kaushik Narayan Ravishankar</Typography>
 			</Box>
 			<Divider />
 			<List>
-				{menuSections.map((menuItem, index) => (
+				{menuSections.filter(menuItem => menuItem.extLink === false).map(menuItem => (
 					<ListItem onClick={() => { handleDrawerSelect(menuItem.key); }} key={menuItem.key} disablePadding>
 						<ListItemButton selected={activeSection.key === menuItem.key}>
+							<ListItemIcon>
+								{menuItem.display_icon}
+							</ListItemIcon>
+							<ListItemText primary={menuItem.display_name} />
+						</ListItemButton>
+					</ListItem>
+				))}
+			</List>
+			<Divider />
+			<List>
+				{menuSections.filter(menuItem => menuItem.extLink === true).map(menuItem => (
+					<ListItem onClick={() => { handleLinkClick(menuItem.link); }} key={menuItem.key} disablePadding>
+						<ListItemButton>
 							<ListItemIcon>
 								{menuItem.display_icon}
 							</ListItemIcon>
@@ -107,8 +127,6 @@ export default function Menu(props) {
 			</Box> */}
 		</div>
 	);
-
-	const container = window !== undefined ? () => window().document.body : undefined;
 
 	return (
 		<Box sx={{ display: 'flex' }}>
@@ -138,15 +156,17 @@ export default function Menu(props) {
 			<Box
 				component="nav"
 				sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-				aria-label="mailbox folders"
+				aria-label="page links"
 			>
 				<Drawer
-					container={container}
 					variant="temporary"
 					open={mobileOpen}
-					onClose={handleDrawerToggle}
-					ModalProps={{
-						keepMounted: true, // Better open performance on mobile.
+					onTransitionEnd={handleDrawerTransitionEnd}
+					onClose={handleDrawerClose}
+					slotProps={{
+						root: {
+							keepMounted: true, // Better open performance on mobile.
+						},
 					}}
 					sx={{
 						display: { xs: 'block', sm: 'none' },
@@ -166,7 +186,6 @@ export default function Menu(props) {
 					{drawer}
 				</Drawer>
 			</Box>
-			{/* content goes here */}
 			<Box
 				component="main"
 				sx={{ flexGrow: 1, padding: 1, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
@@ -177,3 +196,5 @@ export default function Menu(props) {
 		</Box>
 	);
 }
+
+export default Menu;

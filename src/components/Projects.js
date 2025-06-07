@@ -9,13 +9,34 @@ import { handleLinkClick } from '../utils/linkClick';
 
 export const projectsData = [
 	{
+		key: 'spot-pl-mgr', oneliner: 'the Spotify API to manage playlists in a graph-based flow',
+		name: 'Spotify Playlist Manager',
+		img: 'spot-pl-mgr.png',
+		desc: [
+			'Webapp to sync tracks between your Spotify playlists using the Spotify Web API',
+			'Implemented directed acyclic graph data structures and search algorithms',
+			'Built with ExpressJS, React, PostgreSQL, Docker and deployed on Oracle Cloud VM'
+		],
+		tools: ['React', 'ExpressJS', 'PostgreSQL', 'Spotify API', 'Docker'],
+		link: 'https://spotify-manager.knravish.me'
+	},
+	{
+		key: 'kafka-ch-grafana', oneliner: 'a distributed ETL pipeline for analyzing large-scale Internet traffic traces, using Clickhouse, Kafka and Grafana',
+		name: 'Real-Time Internet Traffic Data Analysis',
+		img: 'kchg-arch-diag.png',
+		desc: [
+			'An end-to-end ETL pipeline for ingesting and analyzing terabyte-scale Internet traffic traces',
+			'Designed using Clickhouse, Kafka, Grafana, and Docker to achieve autoscaling and fault tolerance'
+		],
+		tools: ['Docker', 'Kafka', 'Clickhouse', 'Grafana'],
+		link: 'https://github.com/20kaushik02/real-time-traffic-analysis-clickhouse'
+	},
+	{
 		key: 'fyp-tcp-rl', oneliner: 'adversarial attacks on reinforcement learning-based congestion control for TCP',
 		name: 'TCP-RL',
 		img: 'fyp-arch-diag.png',
 		desc: [
-			// eslint-disable-next-line
-			'Implemented RL based TCP congestion control (deep Q-learning and PPO models), which were 2% more performant\
-			compared to TCPNewReno.',
+			'Implemented RL based TCP congestion control (deep Q-learning and PPO models), which were 2% more performant compared to TCPNewReno.',
 			'Demonstrated that performance under simple adversarial attacks was dampened by 40%.',
 			'Utilized the ns-3 network simulator, TensorFlow and OpenAI’s Gym framework.'
 		],
@@ -28,10 +49,10 @@ export const projectsData = [
 		img: 'k-site-landing.png',
 		desc: [
 			'Flagship website for the 2023 edition of Kurukshetra, CEG\'s international techno-management fest.',
-			'Avg. traffic of 1,000 daily users and transactions',
-			'Built with React and Express.js',
+			'Averaged traffic of 1,000 daily users and transactions.',
+			'Built with React, ExpressJS, PostgreSQL and deployed on AWS EC2',
 		],
-		tools: ['React', 'Express.js', 'AWS'],
+		tools: ['React', 'ExpressJS', 'PostgreSQL', 'AWS EC2'],
 		link: 'https://k23.kurukshetraceg.org.in'
 	},
 	{
@@ -71,13 +92,13 @@ const Projects = () => {
 						onClick={() => handleLinkClick(process.env.PUBLIC_URL + "Projects/" + project.img)}
 					/>
 					<CardContent align="left">
-						<Typography gutterBottom primaryTypographyProps={{ fontSize: 16 }} component="div">
+						<Typography gutterBottom component="div">
 							{project.name}
 						</Typography>
 						<List>
 							{project.desc.map((line, index) =>
 								<ListItem disableGutters key={index}>
-									<ListItemText primaryTypographyProps={{ fontSize: 12 }} primary={line} />
+									<ListItemText slotProps={{ primary: { fontSize: 12 } }} primary={line} />
 								</ListItem>
 							)}
 						</List>
@@ -114,7 +135,7 @@ const Projects = () => {
 					navigation
 					speed={400}
 					spaceBetween={10}
-					slidesPerView={width >= 480 ? 2.4 : 1.1}
+					slidesPerView={width >= 480 ? 2.6 : 1.1}
 					// centeredSlides
 					grabCursor
 				>
