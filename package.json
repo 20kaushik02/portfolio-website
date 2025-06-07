@@ -12,7 +12,12 @@
     "swiper": "^11.2.8"
   },
   "devDependencies": {
-    "react-scripts": "5.0.1"
+    "react-scripts": "^5.0.1"
+  },
+  "overrides": {
+    "react-scripts": {
+      "typescript": "^5.8.3"
+    }
   },
   "scripts": {
     "start": "react-scripts start",
