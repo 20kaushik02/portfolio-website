@@ -1,10 +1,9 @@
-import React from 'react';
 import { Button, ButtonGroup, Divider, List, ListItem, ListItemText, Typography } from '@mui/material';
-import { handleLinkClick } from '../utils/linkClick';
 
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
+import Link from '@mui/material/Link';
 import { projectsData } from './Projects';
 import { experiencesData } from './Career';
 
@@ -21,15 +20,15 @@ const Landing = () => {
 				{/* summary */}
 				<ListItem>
 					<ListItemText
-						primary={"Welcome to my (messy) homepage. I'm an aspiring software developer\
-							whose passions lie in distributed technologies, networks and security,\
-							web development, and machine learning, but open to much more." } />
+						primary={"Welcome to my (messy) homepage. I like data!\
+							My passions lie in data engineering/analytics, distributed technologies,\
+							networks and security, web development, machine learning...\
+							you get the picture." } />
 				</ListItem>
 				{/* current endeavor */}
 				<ListItem>
 					<ListItemText
-						primary={"I'm currently looking for a job! If you know any openings that\
-							you think I would be a good fit for, do reach out." } />
+						primary={"I'm always interested in discussing data systems or networks or any of the above. Ping me!"} />
 				</ListItem>
 				{/* current stuff */}
 				<ListItem>
@@ -55,9 +54,11 @@ const Landing = () => {
 				{socialsData.map((social) => (
 					<Button
 						key={social.key}
-						onClick={() => handleLinkClick(social.socialLink)}
+						component={Link}
+						href={social.socialLink}
+						startIcon={social.socialIcon}
 					>
-						{social.socialIcon}
+						{social.socialText}
 					</Button>
 				))}
 			</ButtonGroup>

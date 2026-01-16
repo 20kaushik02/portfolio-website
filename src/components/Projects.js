@@ -132,7 +132,7 @@ const Projects = () => {
 					pagination={{
 						dynamicBullets: true,
 					}}
-					navigation
+					navigation={false}
 					speed={400}
 					spaceBetween={10}
 					slidesPerView={width >= 480 ? 2.6 : 1.1}

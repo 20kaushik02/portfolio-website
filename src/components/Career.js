@@ -3,6 +3,15 @@ import React, { Fragment } from 'react'
 
 export const experiencesData = [
   {
+    key: 'de-mrvl', type: 'prof', location: 'Marvell Technology', designation: 'Senior Engineer',
+    desc: [
+      'What do I do? Oh you know, bit of this (data engineering, modeling), bit of that (BI, data analysis), the occasional fun (software prototyping), but I\'m not done yet, still growing in the role.',
+      'How do I bring value? Well, I bring a strong focus on inter-domain, cross-functional data architecture, primarily working with messy, big data.',
+      'What would I like to work on next? Hmm, maybe some large-scale distributed problems. ML/DL is always fun to learn and apply. AI? Ehh, dulls the senses a bit sometimes.',
+    ],
+    startDate: 'Oct 2025', endDate: ''
+  },
+  {
     key: 'grad-res-asu', type: 'prof', location: 'Arizona State University', designation: 'Graduate Researcher',
     desc: [
       'Modelled the TCP protocol using high-level Petri nets to enable mathematical analysis of its state machine',

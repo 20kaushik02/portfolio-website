@@ -15,7 +15,7 @@ import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-// import Link from '@mui/material/Link';
+import Link from '@mui/material/Link';
 
 import LandingIcon from '@mui/icons-material/Home';
 import ProjectsIcon from '@mui/icons-material/AccountTree';
@@ -39,12 +39,12 @@ const menuSections = [
 		extLink: false, component: <Landing />
 	},
 	{
-		key: 'proj', display_name: 'Stuff', appbar_text: 'Workbench', display_icon: <ProjectsIcon />,
-		extLink: false, component: <Projects />
-	},
-	{
 		key: 'exp', display_name: 'Work', appbar_text: 'Journey', display_icon: <CareerIcon />,
 		extLink: false, component: <Career />
+	},
+	{
+		key: 'proj', display_name: 'Stuff', appbar_text: 'Workbench', display_icon: <ProjectsIcon />,
+		extLink: false, component: <Projects />
 	},
 	{
 		key: 'ints', display_name: 'Interests', appbar_text: 'My Interests', display_icon: <InterestsIcon />,
@@ -120,11 +120,11 @@ function Menu(props) {
 				))}
 			</List>
 			<Divider />
-			{/* <Box component="div" align="center" padding={2}>
+			<Box component="div" align="center" padding={2}>
 				<Link sx={{ padding: 1 }} href="https://mui.com" underline="hover">
 					Made with MUI
 				</Link>
-			</Box> */}
+			</Box>
 		</div>
 	);
 
