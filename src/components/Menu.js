@@ -3,7 +3,6 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
@@ -16,6 +15,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import Tooltip from '@mui/material/Tooltip';
 
 import LandingIcon from '@mui/icons-material/Home';
 import ProjectsIcon from '@mui/icons-material/AccountTree';
@@ -23,6 +23,8 @@ import CareerIcon from '@mui/icons-material/Work';
 import InterestsIcon from '@mui/icons-material/Headphones';
 import ArticleIcon from '@mui/icons-material/Article';
 import BlogIcon from '@mui/icons-material/RateReview';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 import Landing from './Landing';
 // import LoremIpsum from './LoremIpsum';
@@ -30,6 +32,7 @@ import Projects from './Projects';
 import Career from './Career';
 import { handleLinkClick } from '../utils/linkClick';
 import UnderConstruction from './UnderConstruction';
+import { ColorModeContext } from '../App';
 
 const drawerWidth = 240;
 
@@ -64,6 +67,11 @@ function Menu(props) {
 	const [mobileOpen, setMobileOpen] = React.useState(false);
 	const [isClosing, setIsClosing] = React.useState(false);
 	const [activeSection, setActiveSection] = React.useState(menuSections[0]);
+	const { mode, toggleMode } = React.useContext(ColorModeContext);
+
+	React.useEffect(() => {
+		document.title = `Kaushik | ${activeSection.display_name}`;
+	}, [activeSection]);
 
 	const handleDrawerClose = () => {
 		setIsClosing(true);
@@ -130,7 +138,6 @@ function Menu(props) {
 
 	return (
 		<Box sx={{ display: 'flex' }}>
-			<CssBaseline />
 			<AppBar
 				position="fixed"
 				sx={{
@@ -148,9 +155,14 @@ function Menu(props) {
 					>
 						<MenuIcon />
 					</IconButton>
-					<Typography variant="h6" noWrap component="div">
+					<Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
 						{activeSection.appbar_text}
 					</Typography>
+					<Tooltip title={mode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+						<IconButton color="inherit" aria-label="toggle color mode" onClick={toggleMode}>
+							{mode === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
+						</IconButton>
+					</Tooltip>
 				</Toolbar>
 			</AppBar>
 			<Box

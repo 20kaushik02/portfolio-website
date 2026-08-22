@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
-import { Box, Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Chip, List, ListItem, ListItemText, Typography } from '@mui/material';
+import { Box, Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Chip, List, ListItem, ListItemText, Stack, Typography } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 import { Pagination, Navigation, EffectFade } from "swiper/modules";
 
 import { WidthContext } from '../App';
@@ -82,8 +84,8 @@ const Projects = () => {
 	const width = useContext(WidthContext);
 	const ProjectCard = ({ project }) => {
 		return (
-			<Card sx={{ maxWidth: 400 }}>
-				<CardActionArea>
+			<Card sx={{ maxWidth: 400, height: '100%', display: 'flex', flexDirection: 'column' }}>
+				<CardActionArea sx={{ flexGrow: 1, alignItems: 'stretch', display: 'flex', flexDirection: 'column' }}>
 					<CardMedia
 						component="img"
 						height="140"
@@ -91,8 +93,8 @@ const Projects = () => {
 						alt={project.name}
 						onClick={() => handleLinkClick(process.env.PUBLIC_URL + "Projects/" + project.img)}
 					/>
-					<CardContent align="left">
-						<Typography gutterBottom component="div">
+					<CardContent align="left" sx={{ flexGrow: 1 }}>
+						<Typography gutterBottom component="div" variant="h6">
 							{project.name}
 						</Typography>
 						<List>
@@ -102,11 +104,11 @@ const Projects = () => {
 								</ListItem>
 							)}
 						</List>
-						<Box>
+						<Stack direction="row" flexWrap="wrap" gap={1}>
 							{project.tools.map((tool, index) =>
-								<Chip key={index} label={tool} />
+								<Chip key={index} label={tool} size="small" />
 							)}
-						</Box>
+						</Stack>
 					</CardContent>
 				</CardActionArea>
 				<CardActions>
@@ -132,7 +134,7 @@ const Projects = () => {
 					pagination={{
 						dynamicBullets: true,
 					}}
-					navigation={false}
+					navigation={width >= 480}
 					speed={400}
 					spaceBetween={10}
 					slidesPerView={width >= 480 ? 2.6 : 1.1}
@@ -142,7 +144,7 @@ const Projects = () => {
 					{projectsData.map((project) =>
 						<SwiperSlide sx={{
 							width: 'auto',
-							flexShrink: 0, height: '90%'
+							flexShrink: 0, height: 'auto'
 						}} key={project.key}>
 							<ProjectCard project={project} />
 						</SwiperSlide>

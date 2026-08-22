@@ -16,14 +16,14 @@ const socialsData = [
 const Landing = () => {
 	return (
 		<>
+			<Typography variant="h4" p={2} align="left">
+				Hi, I'm Kaushik 👋
+			</Typography>
 			<List>
 				{/* summary */}
 				<ListItem>
 					<ListItemText
-						primary={"Welcome to my (messy) homepage. I like data!\
-							My passions lie in data engineering/analytics, distributed technologies,\
-							networks and security, web development, machine learning...\
-							you get the picture." } />
+						primary={"Welcome to my (messy) homepage. I like data! My passions lie in data engineering/analytics, distributed technologies, networks and security, web development, machine learning... you get the picture."} />
 				</ListItem>
 				{/* current endeavor */}
 				<ListItem>
