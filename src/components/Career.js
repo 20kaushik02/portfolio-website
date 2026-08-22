@@ -1,4 +1,4 @@
-import { Divider, List, ListItem, ListItemText, Typography } from '@mui/material'
+import { Box, List, ListItem, ListItemText, Typography, useTheme } from '@mui/material'
 import React, { Fragment } from 'react'
 
 export const experiencesData = [
@@ -62,68 +62,66 @@ export const experiencesData = [
   },
 ];
 
+// Simple, dependency-free vertical timeline: a dot + connecting line down the
+// left edge, with each entry's content to the right.
+const TimelineEntry = ({ exp, isLast }) => {
+  const theme = useTheme();
+  return (
+    <Box sx={{ display: 'flex', alignItems: 'stretch' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 24, flexShrink: 0 }}>
+        <Box
+          sx={{
+            width: 14,
+            height: 14,
+            borderRadius: '50%',
+            bgcolor: exp.endDate === '' ? theme.palette.secondary.main : theme.palette.primary.main,
+            border: `2px solid ${theme.palette.background.paper}`,
+            boxShadow: `0 0 0 2px ${theme.palette.primary.main}`,
+            mt: '6px',
+            flexShrink: 0,
+          }}
+        />
+        {!isLast && (
+          <Box sx={{ flexGrow: 1, width: '2px', bgcolor: theme.palette.divider, my: '2px' }} />
+        )}
+      </Box>
+      <Box sx={{ flexGrow: 1, pb: isLast ? 1 : 3 }}>
+        <Typography px={2} align="left" fontSize={16}>
+          <b>{exp.designation}, {exp.location}</b>, <i>{exp.startDate} - {exp.endDate || 'Present'}</i>
+        </Typography>
+        <Typography component="div" p={2} align="left">
+          <List disablePadding sx={{ pl: 2, listStyleType: 'disc' }}>
+            {exp.desc.map((line, index) =>
+              <ListItem disablePadding key={index} sx={{ display: 'list-item' }}>
+                <ListItemText slotProps={{ primary: { fontSize: 13 } }} primary={line} />
+              </ListItem>
+            )}
+          </List>
+        </Typography>
+      </Box>
+    </Box>
+  );
+};
+
+const TimelineSection = ({ title, entries }) => (
+  <Fragment>
+    <Typography p={2} align="left" variant="h5">
+      {title}
+    </Typography>
+    <Box>
+      {entries.map((exp, idx) => (
+        <TimelineEntry key={exp.key} exp={exp} isLast={idx === entries.length - 1} />
+      ))}
+    </Box>
+  </Fragment>
+);
+
 const Career = () => {
   return (
     <>
-      <Typography p={2} align="left" variant="h5">
-        Professional
-      </Typography>
-      {experiencesData.filter(exp => exp.type === 'prof').map((exp, idx) =>
-        <Fragment key={idx}>
-          <Typography px={2} align="left" fontSize={16}>
-            <b>{exp.designation}, {exp.location}</b>, <i>{exp.startDate} - {exp.endDate}</i>
-          </Typography>
-          <Typography component="div" p={2} align="left">
-            <List disablePadding sx={{ pl: 2, listStyleType: 'disc' }}>
-              {exp.desc.map((line, index) =>
-                <ListItem disablePadding key={index} sx={{ display: 'list-item' }}>
-                  <ListItemText slotProps={{ primary: { fontSize: 13 } }} primary={line} />
-                </ListItem>
-              )}
-            </List>
-          </Typography>
-        </Fragment>
-      )}
-      <Divider />
-      <Typography p={2} align="left" variant="h5">
-        Education
-      </Typography>
-      {experiencesData.filter(exp => exp.type === 'edu').map((exp, idx) =>
-        <Fragment key={idx}>
-          <Typography px={2} align="left" fontSize={16}>
-            <b>{exp.designation}, {exp.location}</b>, <i>{exp.startDate} - {exp.endDate}</i>
-          </Typography>
-          <Typography component="div" p={2} align="left">
-            <List disablePadding sx={{ pl: 2, listStyleType: 'disc' }}>
-              {exp.desc.map((line, index) =>
-                <ListItem disablePadding key={index} sx={{ display: 'list-item' }}>
-                  <ListItemText slotProps={{ primary: { fontSize: 13 } }} primary={line} />
-                </ListItem>
-              )}
-            </List>
-          </Typography>
-        </Fragment>
-      )}
-      <Divider />
-      <Typography p={2} align="left" variant="h5">
-        Volunteering
-      </Typography>
-      {experiencesData.filter(exp => exp.type === 'extra').map((exp, idx) =>
-        <Fragment key={idx}>
-          <Typography px={2} align="left" fontSize={16}>
-            <b>{exp.designation}, {exp.location}</b>, <i>{exp.startDate} - {exp.endDate}</i>
-          </Typography>
-          <Typography component="div" p={2} align="left">
-            <List disablePadding sx={{ pl: 2, listStyleType: 'disc' }}>
-              {exp.desc.map((line, index) =>
-                <ListItem disablePadding key={index} sx={{ display: 'list-item' }}>
-                  <ListItemText slotProps={{ primary: { fontSize: 13 } }} primary={line} />
-                </ListItem>
-              )}
-            </List>
-          </Typography>
-        </Fragment>
-      )}
+      <TimelineSection title="Professional" entries={experiencesData.filter(exp => exp.type === 'prof')} />
+      <TimelineSection title="Education" entries={experiencesData.filter(exp => exp.type === 'edu')} />
+      <TimelineSection title="Volunteering" entries={experiencesData.filter(exp => exp.type === 'extra')} />
     </>
   )
 }

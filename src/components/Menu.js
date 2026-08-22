@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Route, Routes, Navigate, useLocation, useNavigate } from 'react-router-dom';
 
 import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
@@ -38,19 +39,19 @@ const drawerWidth = 240;
 
 const menuSections = [
 	{
-		key: 'landing', display_name: 'About', appbar_text: 'Hello There!', display_icon: <LandingIcon />,
+		key: 'landing', path: '/', display_name: 'About', appbar_text: 'Hello There!', display_icon: <LandingIcon />,
 		extLink: false, component: <Landing />
 	},
 	{
-		key: 'exp', display_name: 'Work', appbar_text: 'Journey', display_icon: <CareerIcon />,
+		key: 'exp', path: '/work', display_name: 'Work', appbar_text: 'Journey', display_icon: <CareerIcon />,
 		extLink: false, component: <Career />
 	},
 	{
-		key: 'proj', display_name: 'Stuff', appbar_text: 'Workbench', display_icon: <ProjectsIcon />,
+		key: 'proj', path: '/stuff', display_name: 'Stuff', appbar_text: 'Workbench', display_icon: <ProjectsIcon />,
 		extLink: false, component: <Projects />
 	},
 	{
-		key: 'ints', display_name: 'Interests', appbar_text: 'My Interests', display_icon: <InterestsIcon />,
+		key: 'ints', path: '/interests', display_name: 'Interests', appbar_text: 'My Interests', display_icon: <InterestsIcon />,
 		extLink: false, component: <UnderConstruction />
 	},
 	{
@@ -63,11 +64,17 @@ const menuSections = [
 	},
 ];
 
+const internalSections = menuSections.filter(menuItem => menuItem.extLink === false);
+
 function Menu(props) {
 	const [mobileOpen, setMobileOpen] = React.useState(false);
 	const [isClosing, setIsClosing] = React.useState(false);
-	const [activeSection, setActiveSection] = React.useState(menuSections[0]);
 	const { mode, toggleMode } = React.useContext(ColorModeContext);
+	const location = useLocation();
+	const navigate = useNavigate();
+
+	const activeSection = internalSections.find((menuItem) => menuItem.path === location.pathname)
+		|| internalSections[0];
 
 	React.useEffect(() => {
 		document.title = `Kaushik | ${activeSection.display_name}`;
@@ -91,7 +98,7 @@ function Menu(props) {
 	const handleDrawerSelect = (selectedSectionKey) => {
 		handleDrawerClose();
 		const menuSection = menuSections.filter((menuItem) => menuItem.key === selectedSectionKey)[0];
-		setActiveSection(menuSection);
+		navigate(menuSection.path);
 	}
 
 	const drawer = (
@@ -203,7 +210,12 @@ function Menu(props) {
 				sx={{ flexGrow: 1, padding: 1, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
 			>
 				<Toolbar />
-				{activeSection.component}
+				<Routes>
+					{internalSections.map((menuItem) => (
+						<Route key={menuItem.key} path={menuItem.path} element={menuItem.component} />
+					))}
+					<Route path="*" element={<Navigate to={internalSections[0].path} replace />} />
+				</Routes>
 			</Box>
 		</Box>
 	);

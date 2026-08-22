@@ -1,4 +1,5 @@
 import { createContext, useEffect, useMemo, useState } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Menu from './components/Menu';
@@ -57,7 +58,9 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <WidthContext.Provider value={width}>
-          <Menu />
+          <BrowserRouter basename={process.env.PUBLIC_URL || '/'}>
+            <Menu />
+          </BrowserRouter>
         </WidthContext.Provider>
       </ThemeProvider>
     </ColorModeContext.Provider>
